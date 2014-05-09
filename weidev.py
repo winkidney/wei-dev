@@ -2,7 +2,11 @@
 #coding:utf-8
 #weidev.py - GUI development tools for weichat development
 #version 0.1 - by winkidney -2014-05-08
-
+"""
+This code is for WeiXin-development.
+Modify it for free and enjoy it.
+by winkidney@gmail.com
+"""
 import sys
 from PyQt4.QtCore import *  
 from PyQt4.QtGui import * 
