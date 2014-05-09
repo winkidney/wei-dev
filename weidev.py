@@ -6,6 +6,8 @@
 import sys
 from PyQt4.QtCore import *  
 from PyQt4.QtGui import * 
+import urllib,urllib2,re
+
 from sample_msg import (recv_msg_event,
                         recv_msg_link,
                         recv_msg_location,
@@ -14,6 +16,7 @@ from sample_msg import (recv_msg_event,
                         recv_msg_image,
                         recv_msg_text,
                         )
+
 QTextCodec.setCodecForTr(QTextCodec.codecForName("utf8"))  
 
 class WeiDev(QDialog):
@@ -97,7 +100,7 @@ class WeiDev(QDialog):
         
         layout.addWidget(label_post, 0, 0)
         layout.addWidget(self.line_post_url, 0, 1)
-        layout.addWidget(self.build_info(), 0, 3)
+        #layout.addWidget(self.build_info(), 0, 3)
         
         layout.addWidget(self.build_radios(), 1, 0)
         layout.addWidget(self.msg_send_area, 1,1)
@@ -113,12 +116,32 @@ class WeiDev(QDialog):
         self.show()
         
     def send_msg(self):
+        self.postit.setDisabled(True)
         text = self.msg_send_area.toPlainText()
-        self.msg_response_area.setText(self.tr(text))
-
-    def set_send_area(self,text):
-        self.msg_send_area.setText(self.tr(text))
+        self.get_response()
+        self.postit.setDisabled(False)
         
+    def get_response(self):
+        """get response from wei-server
+           return string object for rendering
+        """
+        addheaders = [('User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0')]
+        self.opener = urllib2.build_opener(
+                urllib2.HTTPHandler()
+                )
+        self.opener.addheaders = addheaders
+        request_body = str(self.msg_send_area.toPlainText())
+        if not request_body:
+            QMessageBox.critical(self,u"错误",  
+                             self.tr("发送消息为空……"))
+            return 
+        url = str(self.line_post_url.text())
+        try:
+            response = self.opener.open(url, request_body, 5)
+            self.msg_response_area.setText(self.tr(response.read()))
+        except:
+            QMessageBox.critical(self,u"错误",  
+                             self.tr("url错误或url访问超时……\n404错误也会让你看到这个对话框:)"))
 def main():
     
     app = QApplication(sys.argv)
