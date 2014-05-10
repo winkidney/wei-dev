@@ -134,7 +134,7 @@ class WeiDev(QDialog):
                 urllib2.HTTPHandler()
                 )
         self.opener.addheaders = addheaders
-        request_body = str(self.msg_send_area.toPlainText())
+        request_body = unicode(self.msg_send_area.toPlainText()).encode('utf-8')
         if not request_body:
             QMessageBox.critical(self,u"错误",  
                              self.tr("发送消息为空……"))
@@ -144,8 +144,10 @@ class WeiDev(QDialog):
             response = self.opener.open(url, request_body, 5)
             self.msg_response_area.setText(self.tr(response.read()))
         except:
+            response.close()
             QMessageBox.critical(self,u"错误",  
                              self.tr("url错误或url访问超时……\n404错误也会让你看到这个对话框:)"))
+        response.close()
 def main():
     
     app = QApplication(sys.argv)
