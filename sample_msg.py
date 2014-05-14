@@ -126,7 +126,15 @@ msg_scene_subscribe = """<xml>
 <EventKey><![CDATA[qrscene_123123]]></EventKey>
 </xml>
 """
-
+recv_msg_user_event = """<xml>
+<ToUserName><![CDATA[toUser]]></ToUserName>
+<FromUserName><![CDATA[FromUser]]></FromUserName>
+<CreateTime>123456789</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[CLICK]]></Event>
+<EventKey><![CDATA[EVENTKEY]]></EventKey>
+</xml>
+"""
 recv_msg_reloc = """<xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
 <FromUserName><![CDATA[fromUser]]></FromUserName>

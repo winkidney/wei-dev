@@ -19,6 +19,7 @@ from sample_msg import (recv_msg_event,
                         recv_msg_voice,
                         recv_msg_image,
                         recv_msg_text,
+                        recv_msg_user_event,
                         )
 
 QTextCodec.setCodecForTr(QTextCodec.codecForName("utf8"))  
@@ -44,6 +45,7 @@ class WeiDev(QDialog):
                       'location' : recv_msg_location,
                       'voice' : recv_msg_voice,
                       'video' : recv_msg_video,
+                      'user_event' : recv_msg_user_event,
                       }
         tmp_widget.setLayout(tmp_layout)
         self.type_radios.buttonClicked.connect(self.echo_msg)
