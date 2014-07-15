@@ -21,6 +21,7 @@ pip install PyQt4
 
 ###Change Log
 
+- 2014-07-15 damonchen 君更正的数据发送类型
 - 2014-05-10 修正了在eclipse中启动可以发送中文而在shell中启动无法发送中文的问题
 - 2014-05-09 first release maybe for last.
 
