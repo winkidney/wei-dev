@@ -13,6 +13,10 @@ wei-dev
 这个程序使用pyqt4构建的,你需要先安装pyqt4
 ```bash
 pip install PyQt4
+
+# or 
+apt-get install python-qt4
+
 ```
 等待完成，然后运行你的weidev.py即可。   
 + 使用

@@ -10,17 +10,19 @@ by winkidney@gmail.com
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-import urllib, urllib2, re
+import urllib2
 
-from sample_msg import (recv_msg_event,
-                        recv_msg_link,
-                        recv_msg_location,
-                        recv_msg_video,
-                        recv_msg_voice,
-                        recv_msg_image,
-                        recv_msg_text,
-                        recv_msg_user_event,
-                        )
+from wei_dev.sample_msg import (
+    recv_msg_event,
+    recv_msg_link,
+    recv_msg_location,
+    recv_msg_video,
+    recv_msg_voice,
+    recv_msg_image,
+    recv_msg_text,
+    recv_msg_user_event,
+)
+
 
 QTextCodec.setCodecForTr(QTextCodec.codecForName("utf8"))
 
@@ -150,11 +152,8 @@ class WeiDev(QDialog):
                                  self.tr("url错误或url访问超时……\n404错误也会让你看到这个对话框:)"))
 
 
-def main():
+def start_app():
     app = QApplication(sys.argv)
     wei_dev = WeiDev()
     sys.exit(app.exec_())
 
-
-if __name__ == '__main__':
-    main()
